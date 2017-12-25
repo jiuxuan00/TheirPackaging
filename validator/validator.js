@@ -62,7 +62,7 @@
                         $group.addClass(result ? "has-success" : "has-error")
                         //校验失败
                         if (!result) {
-                            that.showMessage($field,$field.data("qx-" + rule + "-message"))
+                            that.showMessage($field, $field.data("qx-" + rule + "-message"))
                             return result;
                         }
                     }
@@ -74,4 +74,11 @@
             throw new Error("您验证的不是表单");
         }
     }
-}, "qxValidator"))
+
+    //扩展接口
+    $.fn[plug].extendRule = function (rules) {
+        $.extend(__RULES__, rules);
+    }
+
+
+}, "qxValidator"));

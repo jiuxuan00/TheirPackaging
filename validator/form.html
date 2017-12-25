@@ -7,6 +7,7 @@
         .form-group {
             width: 100%;
             font-size: 14px;
+            line-height: 35px;
             float: left;
             margin-bottom: 20px;
         }
@@ -17,8 +18,8 @@
             float: left;
         }
         .form-group input {
-            width: 200px;
-            line-height: 27px;
+            width: 300px;
+            line-height: 35px;
             padding: 0 10px;
             border: 1px solid #ccc;
             outline: none;
@@ -63,6 +64,17 @@
                data-qx-password-message="请使用字母、数字组合并且只能在6-12个字符之间"
         />
     </div>
+
+
+    <div class="form-group">
+        <label for="">身份证(测试扩展)</label>
+        <input type="text" value=""
+               data-qx-require="true"
+               data-qx-require-message="身份证必须填写"
+               data-qx-cardId="true"
+               data-qx-cardId-message="身份证格式错误"
+        />
+    </div>
     <div class="form-group">
         <label for="">&nbsp;</label>
         <input type="submit" value="确定">
@@ -76,6 +88,13 @@
 <script src="validator.js"></script>
 <script>
     $(function () {
+        //增加扩展接口
+        $.fn.qxValidator.extendRule({
+            "cardId":function () {
+                return /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(this.val())
+            }
+        })
+
         $('#form').qxValidator({
             "raise": "blur"
         });
